@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,12 +16,13 @@ import isep.web.sakila.jpa.config.PersistenceConfig;
 @Import({ PersistenceConfig.class })
 public class MvcConfig extends WebMvcConfigurerAdapter
 {
+	
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/").setViewName("home");
-        registry.addViewController("/actors").setViewName("ActorManagement");
-        registry.addViewController("/customers").setViewName("CustomerManagement");
+        registry.addViewController("/home").setViewName("login");
+        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/login").setViewName("login");
+
     }
 
 }

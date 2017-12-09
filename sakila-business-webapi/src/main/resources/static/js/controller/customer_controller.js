@@ -5,6 +5,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
           self.customer={customerId:null,lastName:'',firstName:'',email:''};
           self.customers=[];
           self.countries=[];
+          self.cities=[];
           
               
           self.fetchAllCountries = function(){
@@ -81,14 +82,36 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
              for(var i = 0; i < self.customers.length; i++){
                  if(self.customers[i].customerId == customerId) {
                     self.customer = angular.copy(self.customers[i]);
+                    
+                    for(var k = 0; k<self.countries.length; k++) {
+                    	if(self.countries[k].countryId == self.customers[i].address.city.country.countryId) {
+                    		$scope.selectedCountry = self.countries[k]
+                    		self.cities = $scope.selectedCountry.cities;
+                    		
+                    		for(var j = 0; j < self.cities.length; j++) {
+                            	if(self.cities[j].cityId == self.customers[i].address.city.cityId) {
+                            		$scope.selectedCity = self.cities[j]
+                            		console.log($scope.selectedCity)
+                            	}
+                            }
+                    	}
+                    }
+                    
                     break;
                  }
              }
+                      };
+         
+         self.fillCityList = function(){
+        	 console.log($scope.selectedCountry)
+             self.cities = $scope.selectedCountry.cities
          };
              
          
          self.reset = function(){
              self.customer={customerId:null,lastName:'',firstName:'',email:''};
+             $scope.selectedCity = null;
+             $scope.selectedCountry= null;
              $scope.myForm.$setPristine(); //reset Form
          };
 
