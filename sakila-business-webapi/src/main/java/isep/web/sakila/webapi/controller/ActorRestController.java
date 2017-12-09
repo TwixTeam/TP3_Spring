@@ -24,9 +24,9 @@ public class ActorRestController
 {
 
 	@Autowired
-	ActorService							actorService;
+	ActorService actorService;
 
-	private static final Log	log	= LogFactory.getLog(ActorRestController.class);
+	private static final Log log = LogFactory.getLog(ActorRestController.class);
 
 	@RequestMapping(value = "/actor/", method = RequestMethod.GET)
 	public ResponseEntity<List<ActorWO>> listAllActors()

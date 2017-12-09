@@ -39,6 +39,5 @@ public class SakilaBusinessDaoApplication
 		}
 		// Closing Spring Context
 		context.close();
-
 	}
 }

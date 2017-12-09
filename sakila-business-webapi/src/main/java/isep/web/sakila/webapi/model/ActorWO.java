@@ -5,11 +5,11 @@ import isep.web.sakila.jpa.entities.Actor;
 public class ActorWO extends WebObject
 {
 
-	private static final long	serialVersionUID	= -1377067679473844279L;
+	private static final long serialVersionUID = -1377067679473844279L;
 
-	protected int							actorId;
-	protected String					lastName;
-	protected String					firstName;
+	protected int actorId;
+	protected String lastName;
+	protected String firstName;
 
 	public ActorWO()
 	{
@@ -65,6 +65,6 @@ public class ActorWO extends WebObject
 	@Override
 	public String toString()
 	{
-		return "Actor [id=" + this.actorId + ", LastNanem=" + this.lastName + ", First=" + this.firstName + "]";
+		return "Actor [id=" + this.actorId + ", LastNane=" + this.lastName + ", First=" + this.firstName + "]";
 	}
 }
