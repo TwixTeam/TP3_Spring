@@ -1,5 +1,6 @@
 package isep.web.sakila.webapi.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -20,19 +21,26 @@ public class CityServiceImpl implements CityService{
 	@Override
 	public CityWO findById(int id) {
 		log.debug(String.format("Looking for address by Id %s", id));
-		City address = cityRepository.findOne(id);
+		City city = cityRepository.findOne(id);
 
-		if (address != null)
+		if (city != null)
 		{
-			return new CityWO(address);
+			return new CityWO(city);
 		}
 		return null;
 	}
 
 	@Override
 	public List<CityWO> findAllCountries() {
-		// TODO Auto-generated method stub
-		return null;
+		List<CityWO> cities = new LinkedList<CityWO>();
+
+		for (City city : cityRepository.findAll())
+		{
+			cities.add(new CityWO(city));
+			log.debug("Adding " + city);
+		}
+
+		return cities;
 	}
 
 }

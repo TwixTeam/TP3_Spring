@@ -1,5 +1,9 @@
 package isep.web.sakila.webapi.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import isep.web.sakila.jpa.entities.City;
 import isep.web.sakila.jpa.entities.Country;
 
 public class CountryWO extends WebObject {
@@ -8,6 +12,7 @@ public class CountryWO extends WebObject {
 
 	private int countryId;
 	private String country;
+	private List<CityWO> cities = new ArrayList<>();
 	
 
 	public CountryWO()
@@ -27,6 +32,10 @@ public class CountryWO extends WebObject {
 		super();
 		this.countryId = country.getCountryId();
 		this.country = country.getCountry();
+		
+		for(City c : country.getCities()) {
+			this.cities.add(new CityWO(c.getCityId(), c.getCity()));
+		}
 	}
 
 	public int getCountryId()
@@ -48,10 +57,20 @@ public class CountryWO extends WebObject {
 	{
 		this.country = country;
 	}
+	
+	public List<CityWO> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<CityWO> cities) {
+		this.cities = cities;
+	}
 
 	@Override
 	public String toString()
 	{
 		return "Country [id=" + this.countryId + ", country=" + this.country + "]";
 	}
+
+	
 }

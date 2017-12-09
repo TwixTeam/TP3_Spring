@@ -4,6 +4,19 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 
 	return {
 		
+			fetchAllCountries: function() {
+				return $http.get('http://localhost:8080/country/')
+						.then(
+								function(response){
+									return response.data;
+								}, 
+								function(errResponse){
+									console.error('Error while fetching countries');
+									return $q.reject(errResponse);
+								}
+						);
+			},
+			
 			fetchAllCustomers: function() {
 					return $http.get('http://localhost:8080/customer/')
 							.then(
@@ -17,7 +30,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 							);
 			},
 		    
-		    createActor: function(customer){
+		    createCustomer: function(customer){
 					return $http.post('http://localhost:8080/customer/', customer)
 							.then(
 									function(response){
@@ -30,7 +43,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 							);
 		    },
 		    
-		    updateActor: function(customer, customerId){
+		    updateCustomer: function(customer, customerId){
      	    	    console.log("XXX", customer);
 					return $http.post('http://localhost:8080/customerUpdate/', customer)
 							.then(
@@ -39,19 +52,6 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 									}, 
 									function(errResponse){
 										console.error('Error while updating customer');
-										return $q.reject(errResponse);
-									}
-							);
-			},
-		    
-			deleteActor: function(customerId){
-					return $http.get('http://localhost:8080/customerDelete/'+customerId)
-							.then(
-									function(response){
-										return response.data;
-									}, 
-									function(errResponse){
-										console.error('Error while deleting customer');
 										return $q.reject(errResponse);
 									}
 							);

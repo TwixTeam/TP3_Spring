@@ -84,23 +84,6 @@ public class CustomerRestController
 
 		return new ResponseEntity<CustomerWO>(currentCustomer, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "/customerDelete/{id}", method = RequestMethod.GET)
-	public ResponseEntity<CustomerWO> deleteCustomer(@PathVariable("id") int id)
-	{
-
-		System.out.println("Fetching & Deleting Customer with id " + id);
-
-		CustomerWO customerWO = customerService.findById(id);
-		if (customerWO == null)
-		{
-			System.out.println("Unable to delete. Customer with id " + id + " not found");
-			return new ResponseEntity<CustomerWO>(HttpStatus.NOT_FOUND);
-		}
-
-		customerService.deleteCustomerById(id);
-		return new ResponseEntity<CustomerWO>(HttpStatus.NO_CONTENT);
-	}
 }
 
 	

@@ -12,10 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import isep.web.sakila.dao.repositories.CustomerRepository;
 import isep.web.sakila.jpa.entities.Customer;
-import isep.web.sakila.webapi.model.CustomerWO;
-import isep.web.sakila.dao.repositories.AddressRepository;
-import isep.web.sakila.jpa.entities.Address;
 import isep.web.sakila.webapi.model.AddressWO;
+import isep.web.sakila.webapi.model.CustomerWO;
+
 
 @Service("customerService")
 @Transactional
@@ -23,11 +22,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
 	private CustomerRepository customerRepository;
-	@Autowired
-	private CustomerRepository addressRepository;
-	@Autowired
-	private CustomerRepository cityRepository;
-	
+		
 	private static final Log log= LogFactory.getLog(CustomerServiceImpl.class);
 
 	@Override
@@ -35,9 +30,8 @@ public class CustomerServiceImpl implements CustomerService{
 		log.debug(String.format("Looking for customer by Id %s", id));
 		Customer customer = customerRepository.findOne(id);
 		
-
 		if (customer != null)
-		{
+		{			
 			return new CustomerWO(customer);
 		}
 		return null;

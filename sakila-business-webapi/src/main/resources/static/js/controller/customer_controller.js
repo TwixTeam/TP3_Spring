@@ -4,7 +4,21 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
           var self = this;
           self.customer={customerId:null,lastName:'',firstName:'',email:''};
           self.customers=[];
+          self.countries=[];
+          
               
+          self.fetchAllCountries = function(){
+        	  CustomerService.fetchAllCountries()
+                  .then(
+      					       function(d) {
+      						        self.countries = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching Currencies');
+            					}
+      			       );
+          };
+          
           self.fetchAllCustomers = function(){
         	  CustomerService.fetchAllCustomers()
                   .then(
@@ -47,7 +61,8 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
                  );
          };
 
-         self.fetchAllCustomerss();
+         self.fetchAllCustomers();
+         self.fetchAllCountries();
 
          self.submit = function() {
              if(self.customer.customerId==null){
@@ -56,7 +71,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
              }else{
                  console.log('Customer updating with id ', self.customer.customerId);
                  console.log('Customer: ', self.customer);
-                 self.update(self.customer);
+                 self.updateCustomer(self.customer);
              }
              self.reset();
          };
@@ -71,17 +86,6 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
              }
          };
              
-         self.remove = function(customerId){
-             console.log('id to be deleted', customerId);
-             for(var i = 0; i < self.customers.length; i++){
-                 if(self.customers[i].customerId == customerId) {
-                    self.reset();
-                    break;
-                 }
-             }
-             self.deleteCustomer(customerId);
-         };
-
          
          self.reset = function(){
              self.customer={customerId:null,lastName:'',firstName:'',email:''};

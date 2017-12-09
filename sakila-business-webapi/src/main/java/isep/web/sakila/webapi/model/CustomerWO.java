@@ -4,8 +4,8 @@ import isep.web.sakila.jpa.entities.Customer;
 
 public class CustomerWO extends WebObject {
 
-	private static final long serialVersionUID = 4803037019034574852L;
-
+	private static final long serialVersionUID = 3858239465219838338L;
+	
 	protected int customerId;
 	protected String lastName;
 	protected String firstName;
@@ -17,14 +17,13 @@ public class CustomerWO extends WebObject {
 		super();
 	}
 
-	public CustomerWO(int customerId, String lastName, String firstName, String email, AddressWO address)
+	public CustomerWO(int customerId, String lastName, String firstName, String email)
 	{
 		super();
 		this.customerId = customerId;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.address = address;
 	}
 
 	public CustomerWO(final Customer customer)
@@ -33,6 +32,7 @@ public class CustomerWO extends WebObject {
 		this.customerId = customer.getCustomerId();
 		this.lastName = customer.getLastName();
 		this.firstName = customer.getFirstName();
+		this.email = customer.getEmail();
 		this.address = new AddressWO(customer.getAddress());
 	}
 
@@ -56,7 +56,7 @@ public class CustomerWO extends WebObject {
 		return email;
 	}
 	
-	public AddressWO getAddressWO() 
+	public AddressWO getAddress() 
 	{
 		return address;
 	}
@@ -79,6 +79,10 @@ public class CustomerWO extends WebObject {
 	public void setEmail(String email) 
 	{
 		this.email = email;
+	}
+	
+	public void setAddress(AddressWO address) {
+		this.address = address;
 	}
 	
 

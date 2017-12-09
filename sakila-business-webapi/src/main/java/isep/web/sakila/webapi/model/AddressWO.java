@@ -19,14 +19,13 @@ public class AddressWO extends WebObject {
 		super();
 	}
 
-	public AddressWO(int addressId, String address, String address2, String district, CityWO city, String postalCode, String phone)
+	public AddressWO(int addressId, String address, String address2, String district, String postalCode, String phone)
 	{
 		super();
 		this.addressId = addressId;
 		this.address = address;
 		this.address2 = address2;
 		this.district = district;
-		this.city = city;
 		this.postalCode = postalCode;
 		this.phone = phone;
 		

@@ -1,7 +1,5 @@
 package isep.web.sakila.webapi.service;
 
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +13,7 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressRepository addressRepository;
-	
+		
 	private static final Log log= LogFactory.getLog(AddressServiceImpl.class);
 
 	@Override
@@ -24,7 +22,7 @@ public class AddressServiceImpl implements AddressService {
 		Address address = addressRepository.findOne(id);
 
 		if (address != null)
-		{
+		{	
 			return new AddressWO(address);
 		}
 		return null;
