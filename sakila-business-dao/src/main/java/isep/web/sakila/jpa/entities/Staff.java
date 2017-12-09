@@ -1,9 +1,28 @@
 package isep.web.sakila.jpa.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import isep.web.sakila.dao.enums.Profile;
 
 
 /**
@@ -53,23 +72,38 @@ public class Staff implements Serializable {
 	@OneToMany(mappedBy="staff")
 	private List<Rental> rentals;
 
+	//bi-directional many-to-one association to Store
+	@ManyToOne
+	@JoinColumn(name="store_id", nullable=false)
+	private Store store;
+
 	//bi-directional many-to-one association to Address
 	@ManyToOne
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
 	//bi-directional many-to-one association to Store
-	@ManyToOne
-	@JoinColumn(name="store_id", nullable=false)
-	private Store store;
-
-	//bi-directional many-to-one association to Store
 	@OneToMany(mappedBy="staff")
 	private List<Store> stores;
-
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PROFILES")
+	private Set<Integer> profiles = new HashSet<>();
+	
+	
 	public Staff() {
+		addPerfil(Profile.STAFF);
 	}
-
+	
+	public void setProfiles(Set<Integer> profiles) {
+		this.profiles = profiles;
+	}
+	public void addPerfil(Profile perfil) {
+		profiles.add(perfil.getCode());
+	}
+	public Set<Profile> getProfiles() {
+		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+	}
 	public byte getStaffId() {
 		return this.staffId;
 	}
@@ -186,20 +220,20 @@ public class Staff implements Serializable {
 		return rental;
 	}
 
-	public Address getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public Store getStore() {
 		return this.store;
 	}
 
 	public void setStore(Store store) {
 		this.store = store;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public List<Store> getStores() {

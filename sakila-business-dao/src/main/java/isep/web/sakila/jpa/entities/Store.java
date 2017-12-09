@@ -36,15 +36,15 @@ public class Store implements Serializable {
 	@OneToMany(mappedBy="store")
 	private List<Staff> staffs;
 
-	//bi-directional many-to-one association to Address
-	@ManyToOne
-	@JoinColumn(name="address_id", nullable=false)
-	private Address address;
-
 	//bi-directional many-to-one association to Staff
 	@ManyToOne
 	@JoinColumn(name="manager_staff_id", nullable=false)
 	private Staff staff;
+
+	//bi-directional many-to-one association to Address
+	@ManyToOne
+	@JoinColumn(name="address_id", nullable=false)
+	private Address address;
 
 	public Store() {
 	}
@@ -131,20 +131,20 @@ public class Store implements Serializable {
 		return staff;
 	}
 
-	public Address getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public Staff getStaff() {
 		return this.staff;
 	}
 
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }

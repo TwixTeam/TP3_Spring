@@ -1,5 +1,5 @@
 package isep.web.sakila.webapi.controller;
-	
+
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -24,7 +24,7 @@ public class ActorRestController
 {
 
 	@Autowired
-	ActorService							actorService;
+	ActorService actorService;
 
 	private static final Log	log	= LogFactory.getLog(ActorRestController.class);
 
@@ -102,5 +102,3 @@ public class ActorRestController
 		return new ResponseEntity<ActorWO>(HttpStatus.NO_CONTENT);
 	}
 }
-
-	

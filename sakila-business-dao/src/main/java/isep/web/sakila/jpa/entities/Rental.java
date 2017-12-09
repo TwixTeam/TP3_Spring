@@ -37,20 +37,20 @@ public class Rental implements Serializable {
 	@OneToMany(mappedBy="rental")
 	private List<Payment> payments;
 
-	//bi-directional many-to-one association to Customer
+	//bi-directional many-to-one association to Staff
 	@ManyToOne
-	@JoinColumn(name="customer_id", nullable=false)
-	private Customer customer;
+	@JoinColumn(name="staff_id", nullable=false)
+	private Staff staff;
 
 	//bi-directional many-to-one association to Inventory
 	@ManyToOne
 	@JoinColumn(name="inventory_id", nullable=false)
 	private Inventory inventory;
 
-	//bi-directional many-to-one association to Staff
+	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="staff_id", nullable=false)
-	private Staff staff;
+	@JoinColumn(name="customer_id", nullable=false)
+	private Customer customer;
 
 	public Rental() {
 	}
@@ -109,12 +109,12 @@ public class Rental implements Serializable {
 		return payment;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
+	public Staff getStaff() {
+		return this.staff;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
 	public Inventory getInventory() {
@@ -125,12 +125,12 @@ public class Rental implements Serializable {
 		this.inventory = inventory;
 	}
 
-	public Staff getStaff() {
-		return this.staff;
+	public Customer getCustomer() {
+		return this.customer;
 	}
 
-	public void setStaff(Staff staff) {
-		this.staff = staff;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

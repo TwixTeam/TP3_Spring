@@ -21,15 +21,15 @@ public class FilmCategory implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="category_id", nullable=false, insertable=false, updatable=false)
-	private Category category;
-
 	//bi-directional many-to-one association to Film
 	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
 	private Film film;
+
+	//bi-directional many-to-one association to Category
+	@ManyToOne
+	@JoinColumn(name="category_id", nullable=false, insertable=false, updatable=false)
+	private Category category;
 
 	public FilmCategory() {
 	}
@@ -50,20 +50,20 @@ public class FilmCategory implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 	public Film getFilm() {
 		return this.film;
 	}
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

@@ -32,15 +32,15 @@ public class Payment implements Serializable {
 	@Column(name="payment_date", nullable=false)
 	private Date paymentDate;
 
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="customer_id", nullable=false)
-	private Customer customer;
-
 	//bi-directional many-to-one association to Rental
 	@ManyToOne
 	@JoinColumn(name="rental_id")
 	private Rental rental;
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne
+	@JoinColumn(name="customer_id", nullable=false)
+	private Customer customer;
 
 	//bi-directional many-to-one association to Staff
 	@ManyToOne
@@ -82,20 +82,20 @@ public class Payment implements Serializable {
 		this.paymentDate = paymentDate;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public Rental getRental() {
 		return this.rental;
 	}
 
 	public void setRental(Rental rental) {
 		this.rental = rental;
+	}
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Staff getStaff() {

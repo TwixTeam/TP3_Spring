@@ -1,7 +1,7 @@
 'use strict';
-
+ 
 App.factory('ActorService', ['$http', '$q', function($http, $q){
-
+ 
 	return {
 		
 			fetchAllActors: function() {
@@ -58,5 +58,5 @@ App.factory('ActorService', ['$http', '$q', function($http, $q){
 			}
 		
 	};
-
+ 
 }]);

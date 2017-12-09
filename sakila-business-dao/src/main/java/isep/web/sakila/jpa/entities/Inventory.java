@@ -24,15 +24,15 @@ public class Inventory implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
-	//bi-directional many-to-one association to Film
-	@ManyToOne
-	@JoinColumn(name="film_id", nullable=false)
-	private Film film;
-
 	//bi-directional many-to-one association to Store
 	@ManyToOne
 	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
+
+	//bi-directional many-to-one association to Film
+	@ManyToOne
+	@JoinColumn(name="film_id", nullable=false)
+	private Film film;
 
 	//bi-directional many-to-one association to Rental
 	@OneToMany(mappedBy="inventory")
@@ -57,20 +57,20 @@ public class Inventory implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public Film getFilm() {
-		return this.film;
-	}
-
-	public void setFilm(Film film) {
-		this.film = film;
-	}
-
 	public Store getStore() {
 		return this.store;
 	}
 
 	public void setStore(Store store) {
 		this.store = store;
+	}
+
+	public Film getFilm() {
+		return this.film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
 	}
 
 	public List<Rental> getRentals() {

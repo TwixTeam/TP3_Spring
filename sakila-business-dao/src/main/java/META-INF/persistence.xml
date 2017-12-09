@@ -12,7 +12,6 @@
 		<class>isep.web.sakila.jpa.entities.FilmActorPK</class>
 		<class>isep.web.sakila.jpa.entities.FilmCategory</class>
 		<class>isep.web.sakila.jpa.entities.FilmCategoryPK</class>
-		<class>isep.web.sakila.jpa.entities.FilmText</class>
 		<class>isep.web.sakila.jpa.entities.Inventory</class>
 		<class>isep.web.sakila.jpa.entities.Language</class>
 		<class>isep.web.sakila.jpa.entities.Payment</class>
