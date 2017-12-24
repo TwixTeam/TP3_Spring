@@ -10,7 +10,7 @@ public class AddressWO extends WebObject {
 	private String address;
 	private String address2;
 	private String district;
-	private CityWO city;
+	private int cityId;
 	private String postalCode;
 	private String phone;
 	
@@ -24,9 +24,9 @@ public class AddressWO extends WebObject {
 		super();
 		this.addressId = addressId;
 		this.address = address;
-		this.address2 = address2;
+		this.address2 = address2; // nullable
 		this.district = district;
-		this.postalCode = postalCode;
+		this.postalCode = postalCode; // nullable
 		this.phone = phone;
 		
 	}
@@ -38,7 +38,7 @@ public class AddressWO extends WebObject {
 		this.address = address.getAddress();
 		this.address2 = address.getAddress2();
 		this.district = address.getDistrict();
-		this.city = new CityWO(address.getCity());
+		this.cityId = address.getCity().getCityId();
 		this.postalCode = address.getPostalCode();
 		this.phone = address.getPhone();
 	}
@@ -68,11 +68,11 @@ public class AddressWO extends WebObject {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	public CityWO getCity() {
-		return city;
+	public int getCityId() {
+		return cityId;
 	}
-	public void setCity(CityWO city) {
-		this.city = city;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
 	public String getPostalCode() {
 		return postalCode;
@@ -92,6 +92,6 @@ public class AddressWO extends WebObject {
 	{
 		return "Address [id=" + this.addressId + ", address=" + this.address + ", address2=" + this.address2 +
 				", district=" + this.district + ", postalCode=" + this.postalCode + ", phone=" + this.phone +
-				 " " + this.city +"]";
+				 " " + this.cityId +"]";
 	}
 }

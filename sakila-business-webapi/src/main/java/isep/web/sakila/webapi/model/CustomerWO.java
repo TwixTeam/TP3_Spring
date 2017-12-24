@@ -6,12 +6,17 @@ public class CustomerWO extends WebObject {
 
 	private static final long serialVersionUID = 3858239465219838338L;
 	
+	//Customer
 	protected int customerId;
 	protected String lastName;
 	protected String firstName;
 	protected String email;
+	
+	//Address
 	protected AddressWO address;
+	protected int countryId;
 
+	
 	public CustomerWO()
 	{
 		super();
@@ -34,6 +39,7 @@ public class CustomerWO extends WebObject {
 		this.firstName = customer.getFirstName();
 		this.email = customer.getEmail();
 		this.address = new AddressWO(customer.getAddress());
+		this.countryId = customer.getAddress().getCity().getCountry().getCountryId();
 	}
 
 	public String getFirstName()
@@ -81,10 +87,17 @@ public class CustomerWO extends WebObject {
 		this.email = email;
 	}
 	
+	public int getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(int countryId) {
+		this.countryId = countryId;
+	}
+	
 	public void setAddress(AddressWO address) {
 		this.address = address;
 	}
-	
 
 	@Override
 	public String toString()

@@ -3,8 +3,8 @@ package isep.web.sakila.webapi.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import isep.web.sakila.jpa.entities.City;
 import isep.web.sakila.jpa.entities.Country;
+import isep.web.sakila.jpa.entities.City;
 
 public class CountryWO extends WebObject {
 
@@ -12,7 +12,7 @@ public class CountryWO extends WebObject {
 
 	private int countryId;
 	private String country;
-	private List<CityWO> cities = new ArrayList<>();
+	private List<CityWO> cities;
 	
 
 	public CountryWO()
@@ -32,10 +32,12 @@ public class CountryWO extends WebObject {
 		super();
 		this.countryId = country.getCountryId();
 		this.country = country.getCountry();
-		
+		this.cities = new ArrayList<>();
+				
 		for(City c : country.getCities()) {
-			this.cities.add(new CityWO(c.getCityId(), c.getCity()));
+			this.cities.add(new CityWO(c));
 		}
+
 	}
 
 	public int getCountryId()
@@ -57,6 +59,8 @@ public class CountryWO extends WebObject {
 	{
 		this.country = country;
 	}
+	
+	
 	
 	public List<CityWO> getCities() {
 		return cities;

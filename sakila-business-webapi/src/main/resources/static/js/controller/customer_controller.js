@@ -33,12 +33,14 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
           };
            
           self.createCustomer = function(customer){
+        	  
+        	  console.log(customer);
               CustomerService.createCustomer(customer)
 		              .then(
                       self.fetchAllCustomers, 
 				              function(errResponse){
 					               console.error('Error while creating Customer.');
-				              }	
+				              }
                   );
           };
 
@@ -67,6 +69,7 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
 
          self.submit = function() {
              if(self.customer.customerId==null){
+           	  	self.customer.address.cityId=$scope.selectedCity.cityId;
                  console.log('Saving New Customer', self.customer);    
                  self.createCustomer(self.customer);
              }else{
@@ -103,7 +106,6 @@ App.controller('CustomerController', ['$scope', 'CustomerService', function($sco
                       };
          
          self.fillCityList = function(){
-        	 console.log($scope.selectedCountry)
              self.cities = $scope.selectedCountry.cities
          };
              

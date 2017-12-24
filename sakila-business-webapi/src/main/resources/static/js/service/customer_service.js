@@ -31,7 +31,11 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 			},
 		    
 		    createCustomer: function(customer){
-					return $http.post('http://localhost:8080/customer/', customer)
+		    		var rental = {
+		    				customerId: 1,
+		    				filmId: 1
+		    		} 
+					return $http.post('http://localhost:8080/rental/', rental)
 							.then(
 									function(response){
 										return response.data;
@@ -52,6 +56,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 									}, 
 									function(errResponse){
 										console.error('Error while updating customer');
+										console.log(errResponse)
 										return $q.reject(errResponse);
 									}
 							);

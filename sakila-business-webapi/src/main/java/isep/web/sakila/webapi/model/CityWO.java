@@ -9,7 +9,7 @@ public class CityWO extends WebObject {
 	
 	private int cityId;
 	private String city;
-	private CountryWO country;
+	private int countryId;
 	
 	public CityWO()
 	{
@@ -29,7 +29,7 @@ public class CityWO extends WebObject {
 		super();
 		this.cityId= city.getCityId();
 		this.city=city.getCity();
-		this.country= new CountryWO(city.getCountry());
+		this.countryId= city.getCountry().getCountryId();
 	}
 	
 	public int getCityId() {
@@ -38,11 +38,11 @@ public class CityWO extends WebObject {
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
-	public CountryWO getCountry() {
-		return country;
+	public int getCountry() {
+		return countryId;
 	}
-	public void setCountry(CountryWO country) {
-		this.country = country;
+	public void setCountry(int countryId) {
+		this.countryId = countryId;
 	}
 	public String getCity() {
 		return city;
@@ -55,7 +55,7 @@ public class CityWO extends WebObject {
 	public String toString()
 	{
 		return "Address [id=" + this.cityId + ", address=" + this.city +
-				 " " + this.country +"]";
+				 " " + this.countryId +"]";
 	}
 
 }

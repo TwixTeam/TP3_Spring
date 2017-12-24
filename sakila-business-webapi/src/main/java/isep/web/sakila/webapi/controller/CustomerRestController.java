@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import isep.web.sakila.jpa.entities.Address;
+import isep.web.sakila.webapi.model.AddressWO;
 import isep.web.sakila.webapi.model.CustomerWO;
+import isep.web.sakila.webapi.service.AddressService;
 import isep.web.sakila.webapi.service.CustomerService;
 
 @RestController
@@ -25,6 +28,9 @@ public class CustomerRestController
 
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	AddressService addressService;
 
 	private static final Log log = LogFactory.getLog(CustomerRestController.class);
 
@@ -58,6 +64,9 @@ public class CustomerRestController
 	public ResponseEntity<Void> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{
 		System.out.println("Creating Customer " + customerWO.getLastName());
+		
+		Address newAddress = addressService.saveAddress(customerWO.getAddress());
+		customerWO.setAddress(new AddressWO(newAddress));
 
 		customerService.saveCustomer(customerWO);
 
@@ -77,9 +86,26 @@ public class CustomerRestController
 			System.out.println("Customer with id " + customerWO.getCustomerId() + " not found");
 			return new ResponseEntity<CustomerWO>(HttpStatus.NOT_FOUND);
 		}
-
+	
+		AddressWO address = addressService.findById(currentCustomer.getAddress().getAddressId());
+		
+		if (address == null)
+		{
+			System.out.println("Address with id " + customerWO.getAddress().getAddressId() + " not found");
+			return new ResponseEntity<CustomerWO>(HttpStatus.NOT_FOUND);
+		}
+		
+		address.setAddress(customerWO.getAddress().getAddress());
+		address.setAddress2(customerWO.getAddress().getAddress2());
+		address.setDistrict(customerWO.getAddress().getDistrict());
+		address.setPhone(customerWO.getAddress().getPhone());
+		address.setPostalCode(customerWO.getAddress().getPostalCode());
+		address.setCityId(customerWO.getAddress().getCityId());
+		addressService.updateAddress(address);
+		
 		currentCustomer.setLastName(customerWO.getLastName());
 		currentCustomer.setFirstName(customerWO.getFirstName());
+		currentCustomer.setEmail(customerWO.getEmail());
 		customerService.updateCustomer(currentCustomer);
 
 		return new ResponseEntity<CustomerWO>(currentCustomer, HttpStatus.OK);

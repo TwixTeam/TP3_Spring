@@ -38,11 +38,11 @@ public class CountryRestController
 	@RequestMapping(value = "/country/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CountryWO> getCountry(@PathVariable("id") int id)
 	{
-		System.out.println("Fetching Customer with id " + id);
+		System.out.println("Fetching Country with id " + id);
 		CountryWO countryWO = countryService.findById(id);
 		if (countryWO == null)
 		{
-			System.out.println("Customer with id " + id + " not found");
+			System.out.println("Country with id " + id + " not found");
 			return new ResponseEntity<CountryWO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<CountryWO>(countryWO, HttpStatus.OK);

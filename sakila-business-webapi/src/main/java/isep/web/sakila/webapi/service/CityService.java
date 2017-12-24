@@ -8,5 +8,5 @@ public interface CityService {
 
 	CityWO findById(int id);
 
-	List<CityWO> findAllCountries();
+	List<CityWO> findAllCities();
 }
