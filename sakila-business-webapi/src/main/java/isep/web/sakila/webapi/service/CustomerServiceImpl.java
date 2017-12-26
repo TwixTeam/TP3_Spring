@@ -66,6 +66,7 @@ public class CustomerServiceImpl implements CustomerService{
 		customer.setEmail(customerWO.getEmail());
 		customer.setAddress(addressRepository.findOne(customerWO.getAddress().getAddressId()));
 		customer.setStore(storeRepository.findOne(1));
+		customer.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		customer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 		Customer c = customerRepository.save(customer);
 		return (new CustomerWO(c));
