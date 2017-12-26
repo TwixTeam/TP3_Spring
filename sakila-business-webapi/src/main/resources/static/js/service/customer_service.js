@@ -35,7 +35,7 @@ App.factory('CustomerService', ['$http', '$q', function($http, $q){
 		    				customerId: 1,
 		    				filmId: 1
 		    		} 
-					return $http.post('http://localhost:8080/rental/', rental)
+					return $http.post('http://localhost:8080/customer/', customer)
 							.then(
 									function(response){
 										return response.data;

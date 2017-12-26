@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import isep.web.sakila.webapi.service.AddressService;
 import isep.web.sakila.webapi.service.CustomerService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerRestController
 {
 
@@ -34,6 +36,7 @@ public class CustomerRestController
 
 	private static final Log log = LogFactory.getLog(CustomerRestController.class);
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
 	public ResponseEntity<List<CustomerWO>> listAllCustomers()
 	{
@@ -45,6 +48,7 @@ public class CustomerRestController
 		return new ResponseEntity<List<CustomerWO>>(customers, HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CustomerWO> getCustomer(@PathVariable("id") int id)
 	{
@@ -60,21 +64,22 @@ public class CustomerRestController
 
 	// -------------------Create a Customer----------------------------------
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
+	public ResponseEntity<CustomerWO> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{
-		System.out.println("Creating Customer " + customerWO.getLastName());
+		System.out.println("Creating Customer " + customerWO.toString());
 		
 		Address newAddress = addressService.saveAddress(customerWO.getAddress());
 		customerWO.setAddress(new AddressWO(newAddress));
 
-		customerService.saveCustomer(customerWO);
+		CustomerWO newCustomer = customerService.saveCustomer(customerWO);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/customer/{id}").buildAndExpand(customerWO.getCustomerId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<CustomerWO>(newCustomer, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/customerUpdate/", method = RequestMethod.PUT)
 	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ public class CountryRestController
 
 	private static final Log log = LogFactory.getLog(CountryRestController.class);
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/country/", method = RequestMethod.GET)
 	public ResponseEntity<List<CountryWO>> listAllCountries()
 	{
@@ -35,6 +37,7 @@ public class CountryRestController
 		return new ResponseEntity<List<CountryWO>>(countries, HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/country/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CountryWO> getCountry(@PathVariable("id") int id)
 	{

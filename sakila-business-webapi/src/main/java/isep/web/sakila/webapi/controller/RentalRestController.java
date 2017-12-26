@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ public class RentalRestController
 
 	private static final Log log = LogFactory.getLog(RentalRestController.class);
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/rental/", method = RequestMethod.GET)
 	public ResponseEntity<List<RentalWO>> listAllRentals()
 	{
@@ -53,7 +55,9 @@ public class RentalRestController
 		}
 		return new ResponseEntity<List<RentalWO>>(rentals, HttpStatus.OK);
 	}
-
+	
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/rental/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RentalWO> getRental(@PathVariable("id") int id)
 	{
@@ -67,6 +71,7 @@ public class RentalRestController
 		return new ResponseEntity<RentalWO>(rentalWO, HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/customerRentals/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<FilmWO>> listRentalsById(@PathVariable("id") int id)
 	{
@@ -79,6 +84,7 @@ public class RentalRestController
 		return new ResponseEntity<List<FilmWO>>(rentals, HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/availableFilms/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<FilmWO>> listNoRentedFilmsById(@PathVariable("id") int id)
 	{
@@ -91,7 +97,7 @@ public class RentalRestController
 		return new ResponseEntity<List<FilmWO>>(rentals, HttpStatus.OK);
 	}
 
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/rental/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createRental(@RequestBody IdsWO ids, UriComponentsBuilder ucBuilder)
 	{
@@ -115,6 +121,7 @@ public class RentalRestController
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/rentalUpdate/", method = RequestMethod.PUT)
 	public ResponseEntity<RentalWO> updateRental(@RequestBody IdsWO ids, UriComponentsBuilder ucBuilder)
 	{

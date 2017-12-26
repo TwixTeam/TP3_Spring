@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService{
 		return customers;
 	}
 
-	public void saveCustomer(CustomerWO customerWO)
+	public CustomerWO saveCustomer(CustomerWO customerWO)
 	{
 		
 		Customer customer = new Customer();
@@ -67,7 +67,8 @@ public class CustomerServiceImpl implements CustomerService{
 		customer.setAddress(addressRepository.findOne(customerWO.getAddress().getAddressId()));
 		customer.setStore(storeRepository.findOne(1));
 		customer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
-		customerRepository.save(customer);
+		Customer c = customerRepository.save(customer);
+		return (new CustomerWO(c));
 	}
 
 	public void updateCustomer(CustomerWO customerWO)
