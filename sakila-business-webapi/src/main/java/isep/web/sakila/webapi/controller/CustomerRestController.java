@@ -75,7 +75,7 @@ public class CustomerRestController
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/customerUpdate/", method = RequestMethod.POST)
+	@RequestMapping(value = "/customerUpdate/", method = RequestMethod.PUT)
 	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{
 		log.error(String.format("Updating Customer %s ", customerWO.getCustomerId()));

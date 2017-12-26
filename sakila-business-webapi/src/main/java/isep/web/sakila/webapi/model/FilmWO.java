@@ -1,6 +1,7 @@
 package isep.web.sakila.webapi.model;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import isep.web.sakila.jpa.entities.Film;
@@ -13,6 +14,7 @@ public class FilmWO extends WebObject {
 	protected String title;
 	protected String description;
 	protected Date releaseYear;
+	protected Date rentalDate;
 	protected int rentalDuration;
 	protected BigDecimal rentalRate;
 	protected int length;
@@ -32,6 +34,7 @@ public class FilmWO extends WebObject {
 		this.rentalDuration = film.getRentalDuration();
 		this.rentalRate = film.getRentalRate();
 		this.length = film.getLength();
+		this.rentalDate = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getFilmId() {
