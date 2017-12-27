@@ -16,7 +16,7 @@ import isep.web.sakila.webapi.security.JWTUtil;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/auth")
 public class AuthController {
 
@@ -25,7 +25,7 @@ public class AuthController {
 	
 //	@Autowired
 //	private AuthService service;
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
 	public ResponseEntity<String> refreshToken(@RequestBody CredentialsWO ids, HttpServletResponse response) {
 		
