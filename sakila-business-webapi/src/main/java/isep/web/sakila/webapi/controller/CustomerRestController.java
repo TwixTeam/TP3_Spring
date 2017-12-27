@@ -36,7 +36,7 @@ public class CustomerRestController
 
 	private static final Log log = LogFactory.getLog(CustomerRestController.class);
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
 	public ResponseEntity<List<CustomerWO>> listAllCustomers()
 	{
@@ -48,7 +48,7 @@ public class CustomerRestController
 		return new ResponseEntity<List<CustomerWO>>(customers, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CustomerWO> getCustomer(@PathVariable("id") int id)
 	{
@@ -64,7 +64,7 @@ public class CustomerRestController
 
 	// -------------------Create a Customer----------------------------------
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
 	public ResponseEntity<CustomerWO> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{
@@ -79,7 +79,7 @@ public class CustomerRestController
 		return new ResponseEntity<CustomerWO>(newCustomer, HttpStatus.CREATED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/customerUpdate/", method = RequestMethod.PUT)
 	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{

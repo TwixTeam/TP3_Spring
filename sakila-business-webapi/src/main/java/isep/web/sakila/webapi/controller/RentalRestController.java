@@ -43,7 +43,7 @@ public class RentalRestController
 
 	private static final Log log = LogFactory.getLog(RentalRestController.class);
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/rental/", method = RequestMethod.GET)
 	public ResponseEntity<List<RentalWO>> listAllRentals()
 	{
@@ -57,7 +57,7 @@ public class RentalRestController
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/rental/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RentalWO> getRental(@PathVariable("id") int id)
 	{
@@ -71,7 +71,7 @@ public class RentalRestController
 		return new ResponseEntity<RentalWO>(rentalWO, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/customerRentals/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<FilmWO>> listRentalsById(@PathVariable("id") int id)
 	{
@@ -84,7 +84,7 @@ public class RentalRestController
 		return new ResponseEntity<List<FilmWO>>(rentals, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/availableFilms/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<FilmWO>> listNoRentedFilmsById(@PathVariable("id") int id)
 	{
@@ -97,7 +97,7 @@ public class RentalRestController
 		return new ResponseEntity<List<FilmWO>>(rentals, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/rental/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createRental(@RequestBody IdsWO ids, UriComponentsBuilder ucBuilder)
 	{
@@ -121,18 +121,21 @@ public class RentalRestController
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/rentalUpdate/", method = RequestMethod.PUT)
-	public ResponseEntity<RentalWO> updateRental(@RequestBody IdsWO ids, UriComponentsBuilder ucBuilder)
+	public ResponseEntity<Void> updateRental(@RequestBody IdsWO ids, UriComponentsBuilder ucBuilder)
 	{
 		RentalWO rent = rentalService.findRentalByCustomerAndFilmId(ids.getCustomerId(), ids.getFilmId());
 		
-		
+		if(rent == null) {
+			System.out.println("Rental not found");
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
 		
 		rent.setReturnDate(new Timestamp(System.currentTimeMillis()));
 		rentalService.updateRental(rent);
 
-		return new ResponseEntity<RentalWO>(rent, HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 }
