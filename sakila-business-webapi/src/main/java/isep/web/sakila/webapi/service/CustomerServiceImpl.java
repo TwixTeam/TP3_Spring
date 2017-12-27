@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService{
 	{
 		List<CustomerWO> customers = new LinkedList<CustomerWO>();
 		
-		for (Customer customer : customerRepository.findAll())
+		for (Customer customer : customerRepository.findAllOrderByLastName())
 		{
 			customers.add(new CustomerWO(customer));
 			log.debug("Adding " + customer);
